@@ -1,0 +1,75 @@
+<div class="container-login">
+  <div class="content-login">
+
+    <div class="logo">
+      <img src="/img/logo.png" alt="BeatLoop Logo">
+    </div>
+
+    <div class="texto">
+      <span>Log into your account</span>
+    </div>
+
+
+    <div class="login">
+
+      <div class="login-social" [ngClass]="[animationClass, loginSocial ? 'd-flex' : 'd-none']">
+        <div class="social" (click)="loginWithGoogle()">
+          <img src="/img/google_icon.png" alt="Google">
+          Continue with Google
+        </div>
+        <div class="social" (click)="loginWithFacebook()">
+          <img src="/img/facebook_icon.svg" alt="Facebook">
+          Continue with Facebook
+        </div>
+        <div class="social">
+          <img src="/img/apple_icon.png" alt="Apple">
+          Continue with Apple
+        </div>
+        <div class="social" (click)="toggleSocial()">
+          <img src="/img/email_icon.png" alt="Apple">
+          Continue with e-mail
+        </div>
+      </div>
+
+
+      <div class="email" [ngClass]="[animationClass, loginSocial ? 'd-none' : 'd-flex']">
+        <div class="voltar" (click)="toggleSocial()">
+          <i class="fas fa-chevron-left"></i>
+          <span>Back</span>
+        </div>
+
+        <form [formGroup]="userLoginForm">
+          <div class="form-group">
+            <input type="email" placeholder="E-mail address*" formControlName="email">
+          </div>
+          <div class="form-group">
+            <div class="password-input">
+              <input [type]="showPassword ? 'text' : 'password'" placeholder="Password*" formControlName="password">
+              <i class="password-toggle fa-regular" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"
+                (click)="togglePassword()">
+              </i>
+            </div>
+          </div>
+        </form>
+        <div class="dados">
+          <div class="forgot-password">
+            <a href="#">Forgot password?</a>
+          </div>
+          <button [disabled]="userLoginForm.invalid" (click)="userLogin()">Continue</button>
+        </div>
+      </div>
+
+      <div class="create-account">
+        <span>Don't have an account? <a href="/signup">Sign up</a></span>
+      </div>
+
+
+      <div class="terms">
+        By continuing, you agree to Beatloop's
+        <a href="">Terms</a> of Use and <a href="">Privacy Policy.</a>
+        <span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

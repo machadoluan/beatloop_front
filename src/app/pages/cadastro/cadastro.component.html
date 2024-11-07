@@ -1,0 +1,130 @@
+<div class="container-signup">
+  <div class="content-signup">
+
+    <div class="logo">
+      <img src="/img/logo.png" alt="BeatLoop Logo">
+    </div>
+
+    <div class="texto">
+      <h3 class="title">Create your free account</h3>
+      <span class="subtitle">You’re one step closer to the best music you’ve ever made.</span>
+    </div>
+
+
+    <div class="signup">
+
+      <div class="login-social" [ngClass]="[animationClass, loginSocial ? 'd-flex' : 'd-none']">
+        <div class="social">
+          <img src="/img/google_icon.png" alt="Google">
+          Continue with Google
+        </div>
+        <div class="social">
+          <img src="/img/facebook_icon.svg" alt="Facebook">
+          Continue with Facebook
+        </div>
+        <div class="social">
+          <img src="/img/apple_icon.png" alt="Apple">
+          Continue with Apple
+        </div>
+        <div class="social" (click)="toggleSocial()">
+          <img src="/img/email_icon.png" alt="Apple">
+          Continue with e-mail
+        </div>
+      </div>
+
+
+      <div class="email" [ngClass]="[animationClass, loginSocial ? 'd-none' : 'd-flex']">
+        <div class="voltar" (click)="toggleSocial()">
+          <i class="fas fa-chevron-left"></i>
+          <span>Back</span>
+        </div>
+
+        <form [formGroup]="cadastroForm">
+          <div class="form-group">
+            <input type="email" placeholder="E-mail address*" formControlName="email">
+          </div>
+          <div class="form-group">
+            <div class="password-input">
+              <input [type]="showPassword ? 'text' : 'password'" placeholder="Password*" (input)="onPasswordChange($event)" name="password" formControlName="password">
+              <i class="password-toggle fa-regular" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"
+                (click)="togglePassword()">
+              </i>
+            </div>
+            <div class="password-strength" [class.active]="password.length > 0">
+              <div class="strength-bars">
+                <div class="bar" [ngClass]="{
+                    'weak': passwordStrengthClass === 'weak',
+                    'medium': passwordStrengthClass === 'medium',
+                    'strong': passwordStrengthClass === 'strong'
+                  }">
+                </div>
+                <div class="bar" [ngClass]="{
+                    'medium': passwordStrengthClass === 'medium',
+                    'strong': passwordStrengthClass === 'strong'
+                  }">
+                </div>
+                <div class="bar" [ngClass]="{
+                    'strong': passwordStrengthClass === 'strong'
+                  }">
+                </div>
+              </div>
+              <span class="strength-text" [ngClass]="passwordStrengthClass">
+                {{ passwordStrengthText }}
+              </span>
+              <div class="criteria-list" *ngIf="password.length > 0">
+                <div class="criteria-item" [class.valid]="passwordCriteria.minLength">
+                  <i class="fas fa-check"></i>
+                  <span>Mínimo de 8 caracteres</span>
+                </div>
+                <div class="criteria-item" [class.valid]="passwordCriteria.hasUpperCase">
+                  <i class="fas fa-check"></i>
+                  <span>Uma letra maiúscula</span>
+                </div>
+                <div class="criteria-item" [class.valid]="passwordCriteria.hasLowerCase">
+                  <i class="fas fa-check"></i>
+                  <span>Uma letra minúscula</span>
+                </div>
+                <div class="criteria-item" [class.valid]="passwordCriteria.hasNumber">
+                  <i class="fas fa-check"></i>
+                  <span>Um número</span>
+                </div>
+                <div class="criteria-item" [class.valid]="passwordCriteria.hasSpecialChar">
+                  <i class="fas fa-check"></i>
+                  <span>Um caractere especial</span>
+                </div>
+              </div>
+            </div>
+            <div class="password-input">
+              <input [type]="showConfirmPassword ? 'text' : 'password'" (input)="onConfirmPasswordChange($event)" placeholder="Confirm Password*" formControlName="confirmPassword">
+              <i class="password-toggle fa-regular" [class.fa-eye]="!showConfirmPassword"
+                [class.fa-eye-slash]="showConfirmPassword" (click)="toggleConfirmPassword()">
+              </i>
+            </div>
+            <span class="password-mismatch" *ngIf="cadastroForm.get('confirmPassword')?.errors?.['passwordMismatch']">
+              As senhas não coincidem
+            </span>
+          </div>
+        </form>
+
+        <div class="dados">
+          <button [disabled]="cadastroForm.invalid" (click)="cadastrar()" >Continue</button>
+        </div>
+      </div>
+
+
+
+      <div class="create-account">
+        <!-- <div class="linha"></div> -->
+        <span>Don't have an account? <a href="/login">Log In</a></span>
+      </div>
+
+
+      <div class="terms">
+        By continuing, you agree to Beatloop's
+        <a href="">Terms</a> of Use and <a href="">Privacy Policy.</a>
+        <span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
